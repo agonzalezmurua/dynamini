@@ -27,7 +27,7 @@ export function CreateItemInstance<T>(
       return ComposeSave<T>(
         // @ts-ignore
         $factory,
-        Store.getDocumentClient($factory.store_alias).client
+        Store.getDocumentClient($factory.store_alias)
       )(this.attributes);
     }
 
@@ -35,8 +35,9 @@ export function CreateItemInstance<T>(
       key: U,
       value: T[U]
     ): void {
+      // @ts-ignore, these are the same, dk how to fix atm
       $factory.validateAttribute(key, value);
-      this.attributes[key as string] = value;
+      this.attributes[key] = value;
     }
   }
 

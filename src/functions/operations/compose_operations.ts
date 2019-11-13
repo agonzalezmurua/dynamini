@@ -1,5 +1,5 @@
-import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import Factory from "../../factory";
+import { StoreItemType } from "../../store"
 import ComposeQuery, { QueryOperationType } from "./query";
 import ComposeGet, { GetOperationType } from "./get";
 import ComposeScan, { ScanOperationType } from "./scan";
@@ -12,11 +12,15 @@ export type ComposedOperationType<T> = {
 
 export default <T>(
   $factory: Factory<T>,
-  $document_client: DocumentClient
+  $store_item?: StoreItemType
 ): ComposedOperationType<T> => {
+  if (!$store_item) {
+    throw new Error(`No matching store "${$factory.store_alias}" has been provided for Factory ${$factory.schema_name}`)
+  }
+  const client = $store_item.client
   return {
-    query: ComposeQuery<T>($factory, $document_client),
-    get: ComposeGet<T>($factory, $document_client),
-    scan: ComposeScan<T>($factory, $document_client)
+    query: ComposeQuery<T>($factory, client),
+    get: ComposeGet<T>($factory, client),
+    scan: ComposeScan<T>($factory, client)
   };
 };

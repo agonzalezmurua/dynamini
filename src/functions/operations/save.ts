@@ -11,8 +11,8 @@ export default <T>($factory: Factory<T>, $document_client: DocumentClient) => (
   }
   const attributes: any = {};
 
-  Object.keys(this.attributeSchema).forEach(key => {
-    attributes[key] = item[key];
+  Object.keys($factory.attributeSchema).forEach(key => {
+    attributes[key] = (item as any)[key];
   });
 
   return $document_client

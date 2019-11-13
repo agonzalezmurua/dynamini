@@ -63,7 +63,7 @@ export class Factory<T = ItemDefinition> {
     this.attributeSchema = attributeSchema;
     this.operation = ComposeOperations(
       this,
-      Store.getDocumentClient(this.store_alias).client
+      Store.getDocumentClient(this.store_alias)
     );
   }
 
@@ -123,10 +123,10 @@ export class Factory<T = ItemDefinition> {
   }
 
   public validateItem(item: T) {
-    const errorlist = [];
+    const errorlist: { [key: string]: string }[] = [];
     Object.entries(this.attributeSchema).forEach(([key, schema]) => {
       try {
-        const value = item[key];
+        const value = (item as any)[key];
         if (!schema) {
           this._raiseError(`Schema validation exception: unknown key "${key}"`);
         }
@@ -151,8 +151,8 @@ export class Factory<T = ItemDefinition> {
     return output;
   }
 
-  public validateAttribute(key: string, value: any) {
-    const schema = this.attributeSchema[key];
+  public validateAttribute(key: Extract<keyof T, string>, value: any) {
+    const schema = this.attributeSchema[key] as AttributeSchema;
     if (schema === undefined) {
       this._raiseError(`Schema validation exception: unkown attribute ${key}`);
     }

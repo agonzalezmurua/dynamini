@@ -12,7 +12,7 @@ export default <T>(
 ): GetOperationType<T> => async attributes => {
   const item = await $document_client
     .get({
-      TableName: schema_name,
+      TableName: $factory.schema_name,
       Key: attributes
     })
     .promise()

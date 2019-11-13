@@ -29,7 +29,7 @@ export default <T>(
   const input: AWS.DynamoDB.DocumentClient.ScanInput = {
     TableName: $factory.schema_name,
     ...ParseExpressions<T>(
-      null,
+      undefined,
       parameters.expression,
       parameters.attributesToGet
     ),

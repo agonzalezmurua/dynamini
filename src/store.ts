@@ -1,10 +1,10 @@
 import { ServiceConfigurationOptions } from "aws-sdk/lib/service";
 import DynamoDB from "aws-sdk/clients/dynamodb";
 
-type StoreItem = { alias: string; client: DynamoDB.DocumentClient };
+export type StoreItemType = { alias: string; client: DynamoDB.DocumentClient };
 
 class Store {
-  private document_clients: StoreItem[] = [];
+  private document_clients: StoreItemType[] = [];
 
   public register(
     alias: string,
@@ -22,7 +22,7 @@ class Store {
     });
   }
 
-  public getDocumentClient(alias: string): StoreItem | undefined {
+  public getDocumentClient(alias: string): StoreItemType | undefined {
     return this.document_clients.find(s => s.alias === alias);
   }
 }

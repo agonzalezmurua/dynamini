@@ -50,10 +50,13 @@ export function ParseExpressions<T = any>(
       const matchedValues = filterExpression.match(REGEX.EXPRESSION_VALUES);
       const nameKey = `#${key}`;
       ExpressionAttributeNames[nameKey] = key;
-
+      if (matchedValues === null) {
+        throw new Error(`Missing expression values for attrbiute ${key}`)
+      }
       matchedValues.forEach((match, index) => {
         let value = undefined;
-        const [, matchType, matchValue] = match.match(REGEX.EXPRESSION_VALUE); // [1] representa al group match
+        // @ts-ignore
+        const [, matchType, matchValue] = match.match(REGEX.EXPRESSION_VALUE); // [1] represents the group match
         switch (matchType) {
           case "S":
             value = String(matchValue);
