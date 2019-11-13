@@ -161,16 +161,6 @@ export class Factory<T = ItemDefinition> {
   }
 
   public create(item: T): ItemInstance<T> {
-    const errors = this.validateItem(item);
-    if (errors.length !== 0) {
-      throw errors;
-    }
-    const attributes: any = {};
-
-    Object.keys(this.attributeSchema).forEach(key => {
-      attributes[key] = item[key];
-    });
-
     return CreateItemInstance<T>(this, item);
   }
 }

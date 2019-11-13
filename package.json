@@ -1,5 +1,5 @@
 {
-  "name": "mini-aws-sdk",
+  "name": "dynamini",
   "scripts": {
     "build": "babel src --out-dir lib",
     "test": "mode=DEVELOPMENT ts-node tests/agents.test.ts"
