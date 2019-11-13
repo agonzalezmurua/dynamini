@@ -1,5 +1,5 @@
 import Store from "../store";
-import { Factory } from "../models/factory";
+import { Factory } from "../factory";
 import { PromiseResult } from "aws-sdk/lib/request";
 import { AWSError, DynamoDB } from "aws-sdk";
 import ComposeSave from "../functions/operations/save";

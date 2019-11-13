@@ -1,5 +1,5 @@
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
-import Factory from "../../models/factory";
+import Factory from "../../factory";
 import ComposeQuery, { QueryOperationType } from "./query";
 import ComposeGet, { GetOperationType } from "./get";
 import ComposeScan, { ScanOperationType } from "./scan";

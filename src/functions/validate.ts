@@ -1,4 +1,4 @@
-import { AttributeSchema } from "../models/factory";
+import { AttributeSchema } from "../factory";
 
 export function testType(schema: AttributeSchema, value: any): boolean {
   switch (schema.type) {

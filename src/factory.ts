@@ -1,12 +1,12 @@
-import Store from "../store";
+import Store from "./store";
 import {
   CreateItemInstance,
   ItemInstance
-} from "../functions/create_item_instance";
-import Validate from "../functions/validate";
+} from "./functions/create_item_instance";
+import Validate from "./functions/validate";
 import ComposeOperations, {
   ComposedOperationType
-} from "../functions/operations/compose_operations";
+} from "./functions/operations/compose_operations";
 
 export type NonKeyAttributeSchema = {
   type: (value: any) => void;

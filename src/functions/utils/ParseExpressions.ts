@@ -1,5 +1,5 @@
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
-import Factory, { AttributeSchema } from "../../models/factory";
+import Factory, { AttributeSchema } from "../../factory";
 
 export type ExpressionType<
   ObjectType,

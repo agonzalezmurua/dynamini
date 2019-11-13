@@ -1,4 +1,4 @@
-import Factory from "../../models/factory";
+import Factory from "../../factory";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
 export default <T>($factory: Factory<T>, $document_client: DocumentClient) => (

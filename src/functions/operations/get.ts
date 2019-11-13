@@ -1,4 +1,4 @@
-import Factory, { NonKeyAttributeSchema } from "../../models/factory";
+import Factory, { NonKeyAttributeSchema } from "../../factory";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { ItemInstance, CreateItemInstance } from "../create_item_instance";
 
