@@ -1,7 +1,7 @@
 {
-    "include": ["src"],
     "compilerOptions": {
         "target": "es2018",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node"
     }
 }
