@@ -1,18 +1,21 @@
 {
   "name": "dynamini",
   "scripts": {
-    "build": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib --extensions '.ts'",
     "test": "mode=DEVELOPMENT ts-node tests/agents.test.ts"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.542.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
-    "@types/mongoose": "^5.5.19",
-    "aws-sdk": "^2.542.0",
-    "check-types": "^10.0.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.3"
+  },
+  "peerDependencies": {
+    "aws-sdk": "^2.542.0"
   }
 }
