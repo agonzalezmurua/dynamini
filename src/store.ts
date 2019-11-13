@@ -1,5 +1,5 @@
 import { ServiceConfigurationOptions } from "aws-sdk/lib/service";
-import DynamoDB = require("aws-sdk/clients/dynamodb");
+import DynamoDB from "aws-sdk/clients/dynamodb";
 
 type StoreItem = { alias: string; client: DynamoDB.DocumentClient };
 
