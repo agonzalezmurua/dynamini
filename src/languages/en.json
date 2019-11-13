@@ -1,0 +1,9 @@
+{
+  "factory": {
+    "exceptions": {
+      "__root": "Schema validation exception",
+      "schema.unknown.key": "unknown key",
+      "schema.invalid.value": "value type does not match the provided schema"
+    }
+  }
+}
