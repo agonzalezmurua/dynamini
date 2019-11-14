@@ -2,14 +2,14 @@ import Factory from "../../factory";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { AWSError } from "aws-sdk";
 import {
-  ParseExpressions,
-  ExpressionType,
+  ParseFilterExpressions,
+  FilterExpressionType,
   AttributesToGet,
   Key
-} from "../utils/ParseExpressions";
+} from "../utils/ParseQueryOrScanParameters";
 
 type Parameters<T> = {
-  expression?: ExpressionType<T, Extract<keyof T, string>>;
+  expression?: FilterExpressionType<T, Extract<keyof T, string>>;
   attributesToGet?: AttributesToGet<T>;
   indexName?: string;
   limit?: number;
@@ -27,13 +27,18 @@ export default <T>(
   $factory: Factory<T>,
   $document_client: DocumentClient
 ): QueryOperationType<T> => (keys: Key<T>, parameters: Parameters<T>) => {
+  const parsedExpressions = ParseFilterExpressions(
+    keys,
+    parameters.expression,
+    parameters.attributesToGet
+  );
   const input: AWS.DynamoDB.DocumentClient.QueryInput = {
     TableName: $factory.schema_name,
-    ...ParseExpressions<T>(
-      keys,
-      parameters.expression,
-      parameters.attributesToGet
-    ),
+    KeyConditionExpression: parsedExpressions.KeyConditionExpression,
+    FilterExpression: parsedExpressions.FilterExpression,
+    ExpressionAttributeValues: parsedExpressions.ExpressionAttributeValues,
+    ExpressionAttributeNames: parsedExpressions.ExpressionAttributeNames,
+    ProjectionExpression: parsedExpressions.ProjectionExpression,
     IndexName: parameters.indexName,
     Limit: parameters.limit
   };

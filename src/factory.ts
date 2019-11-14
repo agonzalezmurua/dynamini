@@ -1,4 +1,4 @@
-import Store from "./store";
+import Store from "./Store";
 import {
   CreateItemInstance,
   ItemInstance
@@ -8,8 +8,10 @@ import ComposeOperations, {
   ComposedOperationType
 } from "./functions/compose_operations";
 
+type ConstructorType = StringConstructor | NumberConstructor | ArrayConstructor | BooleanConstructor | ObjectConstructor
+
 export type NonKeyAttributeSchema = {
-  type: (value: any) => void;
+  type: ConstructorType;
   attribute_kind: "attribute";
   required?: boolean;
   validate?: Function | RegExp;
@@ -18,8 +20,8 @@ export type NonKeyAttributeSchema = {
 };
 
 export type KeyAttributeSchema = {
+  type: ConstructorType;
   attribute_kind: "primary" | "sort";
-  type: (value: any) => void;
   required?: boolean;
   validate?: Function | RegExp;
   min?: number;
@@ -52,14 +54,14 @@ export class Factory<T = ItemDefinition> {
   public readonly store_alias: string;
 
   constructor(
-    name: string,
-    store_alias: string,
+    schemaName: string,
+    storeAlias: string,
     attributeSchema: AttributeSchemas<T>,
     options: FactoryOptions = defaultFactoryOptions
   ) {
     this.options = { ...defaultFactoryOptions, ...options };
-    this.schema_name = name;
-    this.store_alias = store_alias;
+    this.schema_name = schemaName;
+    this.store_alias = storeAlias;
     this.attributeSchema = attributeSchema;
     this.operation = ComposeOperations(
       this,
@@ -160,8 +162,8 @@ export class Factory<T = ItemDefinition> {
     this._testField(schema, key, value);
   }
 
-  public create(item: T): ItemInstance<T> {
-    return CreateItemInstance<T>(this, item);
+  public create(attributes: T): ItemInstance<T> {
+    return CreateItemInstance<T>(this, attributes);
   }
 }
 

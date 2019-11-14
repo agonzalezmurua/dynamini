@@ -1,16 +1,15 @@
 import Factory from "../../factory";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import {
-  Key,
-  ExpressionType,
+  FilterExpressionType,
   AttributesToGet,
-  ParseExpressions
-} from "../utils/ParseExpressions";
+  ParseFilterExpressions
+} from "../utils/ParseQueryOrScanParameters";
 import { AWSError } from "aws-sdk";
 
 type Parameters<T> = {
   indexName?: string;
-  expression?: ExpressionType<T, Extract<keyof T, string>>;
+  expression?: FilterExpressionType<T, Extract<keyof T, string>>;
   attributesToGet?: AttributesToGet<T>;
   limit?: number;
 };
@@ -28,7 +27,7 @@ export default <T>(
 ): ScanOperationType<T> => (parameters: Parameters<T>) => {
   const input: AWS.DynamoDB.DocumentClient.ScanInput = {
     TableName: $factory.schema_name,
-    ...ParseExpressions<T>(
+    ...ParseFilterExpressions<T>(
       undefined,
       parameters.expression,
       parameters.attributesToGet

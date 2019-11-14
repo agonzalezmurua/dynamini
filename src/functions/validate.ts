@@ -28,15 +28,15 @@ export function testMinMax(
   let output = false;
   switch (schema.type) {
     case String: {
-      output = (value as string).length > schema[mode]!;
+      output = (value as string).length >= schema[mode]!;
       break;
     }
     case Array: {
-      output = (value as Array<any>).length > schema[mode]!;
+      output = (value as Array<any>).length >= schema[mode]!;
       break;
     }
     case Number: {
-      output = (value as number) > schema[mode]!;
+      output = (value as number) >= schema[mode]!;
       break;
     }
     default: {

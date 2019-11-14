@@ -2,7 +2,7 @@
   "name": "dynamini",
   "scripts": {
     "build": "babel src --out-dir lib --extensions '.ts'",
-    "test": "mode=DEVELOPMENT ts-node tests/agents.test.ts",
+    "test": "mode=DEVELOPMENT ts-node tests/agent.test.ts",
     "emit-types": "tsc --declaration --emitDeclarationOnly --declarationDir lib",
     "check": "tsc  --noEmit --allowJs --isolatedModules"
   },

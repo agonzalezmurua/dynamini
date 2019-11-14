@@ -3,7 +3,7 @@ import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
 export default <T>($factory: Factory<T>, $document_client: DocumentClient) => (
   item: T
-) => () => {
+) => {
   const errors = $factory.validateItem(item);
 
   if (errors.length !== 0) {

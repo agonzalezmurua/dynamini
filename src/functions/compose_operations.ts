@@ -1,5 +1,5 @@
 import Factory from "../factory";
-import { StoreItemType } from "../store"
+import { StoreItemType } from "../Store"
 import ComposeQuery, { QueryOperationType } from "./operations/query";
 import ComposeGet, { GetOperationType } from "./operations/get";
 import ComposeScan, { ScanOperationType } from "./operations/scan";

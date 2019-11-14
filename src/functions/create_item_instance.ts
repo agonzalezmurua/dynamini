@@ -1,4 +1,4 @@
-import Store from "../store";
+import Store from "../Store";
 import { Factory } from "../factory";
 import { PromiseResult } from "aws-sdk/lib/request";
 import { AWSError, DynamoDB } from "aws-sdk";
@@ -16,6 +16,13 @@ export function CreateItemInstance<T>(
   $factory: Factory<T>,
   item: T
 ): ItemInstance<T> {
+  const operations = {
+    save: ComposeSave<T>(
+      // @ts-ignore
+      $factory,
+      Store.getDocumentClient($factory.store_alias)!.client
+    )
+  }
   class Instance<T> implements Instance<T> {
     public readonly attributes: T;
 
@@ -23,12 +30,8 @@ export function CreateItemInstance<T>(
       this.attributes = item;
     }
 
-    public save() {
-      return ComposeSave<T>(
-        // @ts-ignore
-        $factory,
-        Store.getDocumentClient($factory.store_alias)
-      )(this.attributes);
+    public async save() {
+      return operations.save(this.attributes as any);
     }
 
     setAttribute<U extends Extract<keyof T, string>>(
