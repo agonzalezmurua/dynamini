@@ -6,7 +6,7 @@ import {
 import Validate from "./functions/validate";
 import ComposeOperations, {
   ComposedOperationType
-} from "./functions/operations/compose_operations";
+} from "./functions/compose_operations";
 
 export type NonKeyAttributeSchema = {
   type: (value: any) => void;

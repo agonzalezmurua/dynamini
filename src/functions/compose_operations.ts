@@ -1,8 +1,8 @@
-import Factory from "../../factory";
-import { StoreItemType } from "../../store"
-import ComposeQuery, { QueryOperationType } from "./query";
-import ComposeGet, { GetOperationType } from "./get";
-import ComposeScan, { ScanOperationType } from "./scan";
+import Factory from "../factory";
+import { StoreItemType } from "../store"
+import ComposeQuery, { QueryOperationType } from "./operations/query";
+import ComposeGet, { GetOperationType } from "./operations/get";
+import ComposeScan, { ScanOperationType } from "./operations/scan";
 
 export type ComposedOperationType<T> = {
   query: QueryOperationType<T>;
