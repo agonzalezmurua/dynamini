@@ -21,21 +21,43 @@ export default function ParseSchemeConstraintsIntoExpression(
       conditions.push(`${parsed.attributeValueKey} NOT NULL`);
     }
 
-    if (schema.min !== undefined) {
-      const expressionValue = `:${prefix}_${key}_min`;
-      conditions.push(`size(${parsed.attributeValueKey}) < ${expressionValue}`);
-      conditionExpressionValues[expressionValue] = schema.min;
-    }
+    if (schema.type !== Number) {
+      if (schema.min !== undefined) {
+        const expressionValue = `:${prefix}_${key}_min`;
+        conditions.push(
+          `size(${parsed.attributeValueKey}) >= ${expressionValue}`
+        );
+        conditionExpressionValues[expressionValue] = schema.min;
+      }
 
-    if (schema.max !== undefined) {
-      const expressionValue = `:${prefix}_${key}_max`;
-      conditions.push(`size(${parsed.attributeValueKey}) > ${expressionValue}`);
-      conditionExpressionValues[expressionValue] = schema.max;
+      if (schema.max !== undefined) {
+        const expressionValue = `:${prefix}_${key}_max`;
+        conditions.push(
+          `size(${parsed.attributeValueKey}) <= ${expressionValue}`
+        );
+        conditionExpressionValues[expressionValue] = schema.max;
+      }
+    } else {
+      if (schema.min !== undefined) {
+        const expressionValue = `:${prefix}_${key}_min`;
+        conditions.push(
+          `${parsed.attributeValueKey} >= ${expressionValue}`
+        );
+        conditionExpressionValues[expressionValue] = schema.min;
+      }
+
+      if (schema.max !== undefined) {
+        const expressionValue = `:${prefix}_${key}_max`;
+        conditions.push(
+          `${parsed.attributeValueKey} <= ${expressionValue}`
+        );
+        conditionExpressionValues[expressionValue] = schema.max;
+      }
     }
   });
 
   return {
     condition: conditions.join(" AND "),
     conditionExpressionValues
-  }
+  };
 }

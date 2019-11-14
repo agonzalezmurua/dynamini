@@ -3,11 +3,13 @@ import { StoreItemType } from "../Store"
 import ComposeQuery, { QueryOperationType } from "./operations/query";
 import ComposeGet, { GetOperationType } from "./operations/get";
 import ComposeScan, { ScanOperationType } from "./operations/scan";
+import ComposeUpdate, { UpdateOperationType } from "./operations/update";
 
 export type ComposedOperationType<T> = {
   query: QueryOperationType<T>;
   get: GetOperationType<T>;
   scan: ScanOperationType<T>;
+  update: UpdateOperationType<T>;
 };
 
 export default <T>(
@@ -21,6 +23,7 @@ export default <T>(
   return {
     query: ComposeQuery<T>($factory, client),
     get: ComposeGet<T>($factory, client),
-    scan: ComposeScan<T>($factory, client)
+    scan: ComposeScan<T>($factory, client),
+    update: ComposeUpdate<T>($factory, client),
   };
 };

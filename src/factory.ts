@@ -44,7 +44,7 @@ const defaultFactoryOptions: FactoryOptions = {
 
 export type ItemDefinition = { [key: string]: {} };
 
-export class Factory<T = ItemDefinition> {
+export class Factory<T = any> {
   public operation: ComposedOperationType<T>;
   public attributeSchema: AttributeSchemas<T>;
   private options: FactoryOptions;

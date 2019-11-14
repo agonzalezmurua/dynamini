@@ -1,8 +1,6 @@
 import Factory from "../../factory";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
-import { GetOperationType } from "./get";
 import ParseValuePairedExpression from "../utils/ParseValuePairedExpression";
-import { ItemInstance } from "../create_item_instance";
 import ParseSchemeConstraintsIntoExpression from "../utils/ParseSchemeConstraintsIntoExpression";
 
 export type UpdateExpressionType<
@@ -16,7 +14,7 @@ export type UpdateOperationType<T> = (
 ) => Promise<T>;
 
 export default <T>(
-  $factory: Factory,
+  $factory: Factory<T>,
   $document_client: DocumentClient
 ): UpdateOperationType<T> => async (key, expression) => {
   const {
@@ -38,6 +36,7 @@ export default <T>(
     ReturnValues: "ALL_NEW",
     ConditionExpression: condition
   };
+  console.log(input)
   const { Attributes } = await $document_client.update(input).promise()
   
   return Attributes as T;
