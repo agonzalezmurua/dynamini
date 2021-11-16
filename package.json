@@ -14,11 +14,11 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-typescript": "^7.6.0",
     "@types/node": "^12.12.7",
-    "aws-sdk": "^2.542.0",
+    "aws-sdk": "^2.814.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.3"
   },
   "peerDependencies": {
-    "aws-sdk": "^2.542.0"
+    "aws-sdk": "^2.814.0"
   }
 }
